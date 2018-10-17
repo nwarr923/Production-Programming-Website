@@ -46,10 +46,12 @@ print "Insert statement executed, insert id was: " . $result . "\n";
 //to call the dbEsc() method on any individual values!
 // Must do that prior to building the statement here
 
-$query = "SELECT * FROM bookinfo";
+$var = $bookInfo;
+
+$query = "Select * FROM bookinfo HAVING bookinfo.booktitle LIKE $var
+OR bookinfo.isbn LIKE $var OR bookinfo.author LIKE $var";
 
 $result = $db->dbCall($query);
-
 $safeResult = $db->dbEsc($result);
 
 $page = new Template("results.php");
@@ -62,7 +64,7 @@ print $page->getTopSection();
 print "<div class='size-wrapper'>\n";
 print "<header>\n";
 print "<a id='login' href='#'>Login</a>\n";
-print "<a id='siteTitle' href='home.php'>CNMT 310 Group 1!</a>\n";
+print "<a id='siteTitle' href='home.php'>Assignment 1 Website</a>\n";
 print "<nav>\n";
 print "<ul class='navbar'>\n";
 print "<li><a href='home.php'>Home</a></li>\n";
@@ -77,7 +79,7 @@ print "<div class='content'>\n";
 print "<div id='content'>\n";
 print "<h1>Here are your results</h1>\n";
 print "<table>";
-foreach ($result as $row) {
+foreach ($safeResult as $row) {
 	print "<tr>";
 	
 	print "<td>";
@@ -112,7 +114,7 @@ print "</div>\n";
 print "</div>\n";
 
 print "<footer>\n";
-print "<p>CNMT 310, Fall Semester, Group 1</p>\n";
+print "<p>Assignment 1 Footer. Noah Warren, CNMT 310, 9/30/2018</p>\n";
 print "</footer>\n";
 print "</div>\n";
 print $page->getBottomSection();

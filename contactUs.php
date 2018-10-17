@@ -5,6 +5,7 @@ require_once("Template.php");
 $page = new Template("contactUs.php");
 $page->setHeadSection("<link rel='stylesheet' type='text/css' href='headerStyles.css'/>");
 $page->setHeadSection("<link rel='stylesheet' type='text/css' href='formStyles.css'/>");
+$page->setHeadSection("<script src='verify.js'></script>");
 $page->setTopSection();
 $page->setBottomSection();
 
@@ -12,7 +13,7 @@ print $page->getTopSection();
 print "<div class='size-wrapper'>\n";
 print "<header>\n";
 print "<a id='login' href='#'>Login</a>\n";
-print "<a id='siteTitle' href='home.php'>CNMT 310 Group 1!</a>\n";
+print "<a id='siteTitle' href='home.php'>Assignment 1 Website</a>\n";
 print "<nav>\n";
 print "<ul class='navbar'>\n";
 print "<li><a href='home.php'>Home</a></li>\n";
@@ -32,7 +33,7 @@ if (!empty($error_message))
 	print $error_message;
 	print "</p>";
 } // end if
-print "<form action='thankYou.php' method='post'>\n";
+print "<form action='thankYou.php' method='post' name='contactInfo' onsubmit='return (validateForm());>\n";
 print "<fieldset>\n";
 print "<legend>Contact Info</legend>\n";
 print "<div id='data'><br>\n";
@@ -55,7 +56,7 @@ print "</div>\n";
 print "</div>\n";
 
 print "<footer>\n";
-print "<p>CNMT 310, Fall Semester, Group 1</p>\n";
+print "<p>Assignment 1 Footer. Noah Warren, CNMT 310, 9/30/2018</p>\n";
 print "</footer>\n";
 print "</div>\n";
 print $page->getBottomSection();
