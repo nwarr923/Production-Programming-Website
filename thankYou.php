@@ -21,6 +21,25 @@
         exit();
     } // end if
 	
+	//insert contact info into table
+	require_once("db.class.php");
+
+	$db = new DB();
+
+	//var_dump($db);
+
+	if (!$db->getConnStatus()) {
+		print "An error has occurred with connection\n";
+		exit;
+	}
+
+	//message max length 250 characters in table
+	$query = "INSERT INTO contactInfo values(1, $email , $phone_number , $message')";
+	$result = $db->dbCall($query);
+
+	//var_dump($result); should be rows affected == 1
+
+	
 require_once("Template.php");
 
 $page = new Template("ThankYou.php");
@@ -33,7 +52,7 @@ print $page->getTopSection();
 print "<div class='size-wrapper'>\n";
 print "<header>\n";
 print "<a id='login' href='#'>Login</a>\n";
-print "<a id='siteTitle' href='home.php'>Assignment 1 Website</a>\n";
+print "<a id='siteTitle' href='home.php'>CNMT 310 Group 1!</a>\n";
 print "<nav>\n";
 print "<ul class='navbar'>\n";
 print "<li><a href='home.php'>Home</a></li>\n";
@@ -50,7 +69,7 @@ print "</div>\n";
 print "</div>\n";
 
 print "<footer>\n";
-print "<p>Assignment 1 Footer. Noah Warren, CNMT 310, 9/30/2018</p>\n";
+print "<p>CNMT 310, Fall Semester, Group 1</p>\n";
 print "</footer>\n";
 print "</div>\n";
 print $page->getBottomSection();
