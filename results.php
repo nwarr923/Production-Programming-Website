@@ -46,13 +46,12 @@ print "Insert statement executed, insert id was: " . $result . "\n";
 //to call the dbEsc() method on any individual values!
 // Must do that prior to building the statement here
 
-$var = $bookInfo;
-
-$query = "Select * FROM bookinfo HAVING bookinfo.booktitle LIKE $var
-OR bookinfo.isbn LIKE $var OR bookinfo.author LIKE $var";
+$query = "Select * FROM bookinfo HAVING bookinfo.booktitle LIKE $bookInfo
+OR bookinfo.isbn LIKE $bookInfo OR bookinfo.author LIKE $bookInfo";
 
 $result = $db->dbCall($query);
 $safeResult = $db->dbEsc($result);
+
 
 $page = new Template("results.php");
 $page->setHeadSection("<link rel='stylesheet' type='text/css' href='headerStyles.css'/>");
@@ -77,37 +76,45 @@ print "</header>\n";
 
 print "<div class='content'>\n";
 print "<div id='content'>\n";
-print "<h1>Here are your results</h1>\n";
+print "<h1>Here are your results: </h1>\n";
 print "<table>";
-foreach ($safeResult as $row) {
-	print "<tr>";
+
+if(!empty($result) ) {
+
+	foreach ($result as $row) {
 	
-	print "<td>";
-	print ($row['id']); 
-	print "</td>";
+		print "<tr>";
 	
-	print "<td>";
-	print ($row['inserttime']); 
-	print "</td>";
+		print "<td>";
+		print ($row['id']); 
+		print "</td>";
+	
+		print "<td>";
+		print ($row['inserttime']); 
+		print "</td>";
 
 	
-	print "<td>";
-	print ($row['booktitle']); 
-	print "</td>";
+		print "<td>";
+		print ($row['booktitle']); 
+		print "</td>";
 	
-	print "<td>";
-	print ($row['isbn']); 
-	print "</td>";
+		print "<td>";
+		print ($row['isbn']); 
+		print "</td>";
 	
-	print "<td>";
-	print ($row['author']); 
-	print "</td>";
+		print "<td>";
+		print ($row['author']); 
+		print "</td>";
 	
-	print "<td>";
-	print ($row['status']); 
-	print "</td>";
+		print "<td>";
+		print ($row['status']); 
+		print "</td>";
 	
-	print "</tr>";
+		print "</tr>";
+	
+	}
+} else {
+	print "<h1> Item Not Found </h1>";
 }
 print "</table>";
 print "</div>\n";

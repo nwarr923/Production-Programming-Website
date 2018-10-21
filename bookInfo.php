@@ -37,13 +37,13 @@ print "<form action='results.php' method='post' name='bookSearch' onsubmit='retu
 print "<fieldset>\n";
 print "<legend>Book Search</legend>\n";
 print "<div id='data'><br>\n";
-print "<label>Book Information</label>\n";
+print "<label>Book Information:</label>\n";
 print "<input type='text' name='bookInfo'/><br>\n";
-print "</div>\n";
 print "</fieldset>\n";
 print "<div id='buttons'>\n";
 print "<label>&nbsp;</label>\n";
 print "<input type='submit' value='Submit'/><br />\n";
+print "</div>\n";
 print "</div>\n";
 print "</form>\n";
 print "</div>\n";
