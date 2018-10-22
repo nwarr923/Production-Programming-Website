@@ -36,30 +36,12 @@ if (!$db->getConnStatus()) {
   exit;
 }
 
-/*
-//INSERT example
-//Pretend this is unsanitized
-//user data from a form:
-$user = "bob";
-$safeUser = $db->dbEsc($user);
 
-$query = "INSERT INTO testschema (username,pass,active) " .
-          "VALUES ('{$safeUser}','l33t',1)";
-$result = $db->dbCall($query);
-
-//This will contain the insert id
-print "Insert statement executed, insert id was: " . $result . "\n";
-*/
-
-//If using unsanitized data, be sure
-//to call the dbEsc() method on any individual values!
-// Must do that prior to building the statement here
-
-$query = "SELECT * FROM bookinfo";
+$query = "Select * FROM bookinfo HAVING bookinfo.booktitle LIKE '$bookInfo'
+OR bookinfo.isbn LIKE '$bookInfo' OR bookinfo.author LIKE '$bookInfo'";
 
 $result = $db->dbCall($query);
 
-$safeResult = $db->dbEsc($result);
 
 
 $page = new Template("results.php");
