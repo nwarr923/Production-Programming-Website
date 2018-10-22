@@ -1,4 +1,5 @@
 <?php
+
 $bookInfo;
 $error_message = '';
 
@@ -13,6 +14,11 @@ $error_message = '';
 		else {
 			// Filter values
 			$bookInfo = filter_var($bookInfo, FILTER_SANITIZE_STRING);
+
+			if ($bookInfo == FALSE)
+			{
+				$error_message = 'Invalid search.';
+			}
 		}
 	}
 	else {
