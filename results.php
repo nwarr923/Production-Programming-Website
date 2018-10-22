@@ -97,7 +97,7 @@ if(!empty($result) ) {
 			print "<p> ID Number: </p>";
 			print "</td>";
 			
-			print "<td class='spacer'>";
+			print "<td>";
 			print ($row['id']); 
 			print "</td>";
 		print "</tr>";
@@ -107,7 +107,7 @@ if(!empty($result) ) {
 			print "<p> Insert Time: </p>";
 			print "</td>";
 			
-			print "<td class='spacer'>";
+			print "<td>";
 			print ($row['inserttime']); 
 			print "</td>";
 		print "</tr>";
@@ -117,7 +117,7 @@ if(!empty($result) ) {
 			print "<p> Book Title: </p>";
 			print "</td>";
 			
-			print "<td class='spacer'>";
+			print "<td>";
 			print ($row['booktitle']); 
 			print "</td>";
 		print "</tr>";
@@ -127,7 +127,7 @@ if(!empty($result) ) {
 			print "<p> ISBN: </p>";
 			print "</td>";
 			
-			print "<td class='spacer'>";
+			print "<td>";
 			print ($row['isbn']); 
 			print "</td>";
 		print "</tr>";
@@ -137,7 +137,7 @@ if(!empty($result) ) {
 			print "<p> Author: </p>";
 			print "</td>";
 		
-			print "<td class='spacer'>";
+			print "<td>";
 			print ($row['author']); 
 			print "</td>";
 		print "</tr>";
@@ -147,7 +147,7 @@ if(!empty($result) ) {
 			print "<p> Status: </p>";
 			print "</td>";
 		
-			print "<td class='spacer'>";
+			print "<td>";
 			print ($row['status']); 
 			print "</td>";
 		print "</tr>";
