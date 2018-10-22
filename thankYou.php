@@ -22,7 +22,7 @@
     } // end if
 	
 	//insert contact info into table
-	require_once("db.class.php");
+	require_once("DB.class.php");
 
 	$db = new DB();
 
@@ -52,12 +52,13 @@ print $page->getTopSection();
 print "<div class='size-wrapper'>\n";
 print "<header>\n";
 print "<a id='login' href='#'>Login</a>\n";
-print "<a id='siteTitle' href='home.php'>CNMT 310 Group 1!</a>\n";
+print "<a id='siteTitle' href='home.php'>CNMT 310  Group  1</a>\n";
 print "<nav>\n";
 print "<ul class='navbar'>\n";
 print "<li><a href='home.php'>Home</a></li>\n";
 print "<li><a href='aboutUs.php'>About Us</a></li>\n";
 print "<li><a class='active' href='contactUs.php'>Contact Us</a></li>\n";
+print "<li><a href='bookInfo.php'></a></li>\n";
 print "</ul>";
 print "</nav>\n";
 print "</header>\n";
