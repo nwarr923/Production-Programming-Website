@@ -71,7 +71,7 @@ else
     } // end if
 	
 	//insert contact info into table
-	require_once("db.class.php");
+	require_once("DB.class.php");
 
 	$db = new DB();
 
