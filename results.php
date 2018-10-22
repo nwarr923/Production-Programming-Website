@@ -1,19 +1,28 @@
 <?php
+$bookInfo;
+$error_message = '';
+
 // get the data from the form
-    $bookInfo = $_POST['bookInfo'];
+	if (isset($_POST['bookInfo'])) {
+		$bookInfo = $_POST['bookInfo'];
 
-    // validate bookInfo
-    if ( empty($bookInfo) ) {
-        $error_message = 'Please enter a search.';         
-    } else {
-        $error_message = ''; // There are no errors
-    } // end if
+		// Check if empty
+		if (empty($bookInfo)) {
+			$error_message = 'Please enter a search.';         
+		}
+		else {
+			// Filter values
+			$bookInfo = filter_var($bookInfo, FILTER_SANITIZE_STRING);
+		}
+	}
+	else {
+		$error_message = 'Please enter a search.';
+	}
 
-    // if an error message exists, go to the Contact us page
     if ($error_message != '') {
         include('bookInfo.php');
         exit();
-    } // end if
+	}
 	
 require_once("Template.php");
 require_once("DB.class.php");
@@ -27,10 +36,30 @@ if (!$db->getConnStatus()) {
   exit;
 }
 
-$query = "Select * FROM bookinfo HAVING bookinfo.booktitle LIKE '$bookInfo'
-OR bookinfo.isbn LIKE '$bookInfo' OR bookinfo.author LIKE '$bookInfo'";
+/*
+//INSERT example
+//Pretend this is unsanitized
+//user data from a form:
+$user = "bob";
+$safeUser = $db->dbEsc($user);
+
+$query = "INSERT INTO testschema (username,pass,active) " .
+          "VALUES ('{$safeUser}','l33t',1)";
+$result = $db->dbCall($query);
+
+//This will contain the insert id
+print "Insert statement executed, insert id was: " . $result . "\n";
+*/
+
+//If using unsanitized data, be sure
+//to call the dbEsc() method on any individual values!
+// Must do that prior to building the statement here
+
+$query = "SELECT * FROM bookinfo";
 
 $result = $db->dbCall($query);
+
+$safeResult = $db->dbEsc($result);
 
 
 $page = new Template("results.php");
