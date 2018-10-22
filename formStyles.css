@@ -1,0 +1,44 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+#content {
+    width: 450px;
+    padding: 20px 20px;
+    background: white;
+	margin: 0 auto;
+	border: 8px solid #663399;
+}
+h1 {
+    color: #663399;
+}
+label {
+    width: 10em;
+    padding-right: 1em;
+    float: left;
+}
+
+span, label {
+	margin-bottom: 1em;
+}
+
+fieldset {
+	margin-bottom: .5em;
+}
+
+#data input {
+    float: left;
+    width: 15em;
+    margin-bottom: .5em;
+}
+#buttons input {
+    float: left;
+    margin-bottom: .5em;
+}
+br {
+    clear: left;
+}
+.error {
+    color: red;
+    font-weight: bold;
+	font-size: 2em;
+}

@@ -1,0 +1,86 @@
+#siteTitle{
+     font-size: 5em;
+	 font-weight: 600;
+     padding: 0px;
+     font-family: Copperplate, "Copperplate Gothic Light", fantasy;
+     position: static;
+     width: 90%;
+     margin: 0px;
+	 margin-left: 20px;
+     height: 60px;
+     text-decoration: none;
+     color: black;
+ }
+ 
+ #login{
+     float:right;
+     width:10%;
+     font-family: sans-serif;
+     text-align: right;
+     height:60px;
+	 margin-top: 10px;
+	 margin-right: 20px;
+ }
+
+ .navbar  {
+    list-style-type:none;
+    margin: 0;
+    padding: 0px;
+    overflow: hidden;
+    border-bottom: 2px solid black;
+    border-top: 2px solid black;
+	background-color: #663399;
+ }
+
+ .navbar li {
+     float:left;
+     width: 20%;
+ }
+
+ .navbar li a{
+    display: block;
+    text-align: center;
+    font-size: 1.4em;
+    padding: 3px;
+    color: white;
+    text-decoration: none;
+}
+.navbar li a:hover, .active {
+    background-color: lightslategrey;
+    color: white;
+}
+
+.size-wrapper {
+	min-height: 100%;
+	position: relative;
+}
+
+.content {
+	padding-bottom: 40px;
+	margin-top: 3%;
+	margin-left: 5%;
+}
+
+
+header {
+	width: 100%;
+	margin-top: -10px;
+	top: 0px;
+	background-color: #C8BFE7;
+}
+
+body {
+	height: 100%;
+}
+footer {
+	position: fixed;
+	bottom:0;
+	left:0;
+	width: 100%;
+	height: 40px;
+	background-color: #663399;
+	border-top: 2px solid black;
+	border-bottom: 2px solid black;
+	text-align: center;
+	color: white;
+}
