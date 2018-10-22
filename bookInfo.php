@@ -12,7 +12,7 @@ print $page->getTopSection();
 print "<div class='size-wrapper'>\n";
 print "<header>\n";
 print "<a id='login' href='#'>Login</a>\n";
-print "<a id='siteTitle' href='home.php'>CNMT 310 Group 1!</a>\n";
+print "<a id='siteTitle' href='home.php'>CNMT 310  Group  1</a>\n";
 print "<nav>\n";
 print "<ul class='navbar'>\n";
 print "<li><a href='home.php'>Home</a></li>\n";
