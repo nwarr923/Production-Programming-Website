@@ -46,12 +46,11 @@ print "Insert statement executed, insert id was: " . $result . "\n";
 //to call the dbEsc() method on any individual values!
 // Must do that prior to building the statement here
 
-$query = "Select * FROM bookinfo HAVING bookinfo.booktitle LIKE $bookInfo
-OR bookinfo.isbn LIKE $bookInfo OR bookinfo.author LIKE $bookInfo";
+$query = "SELECT * FROM bookinfo";
 
 $result = $db->dbCall($query);
-$safeResult = $db->dbEsc($result);
 
+$safeResult = $db->dbEsc($result);
 
 $page = new Template("results.php");
 $page->setHeadSection("<link rel='stylesheet' type='text/css' href='headerStyles.css'/>");
@@ -63,7 +62,7 @@ print $page->getTopSection();
 print "<div class='size-wrapper'>\n";
 print "<header>\n";
 print "<a id='login' href='#'>Login</a>\n";
-print "<a id='siteTitle' href='home.php'>Assignment 1 Website</a>\n";
+print "<a id='siteTitle' href='home.php'>CNMT 310 Group 1!</a>\n";
 print "<nav>\n";
 print "<ul class='navbar'>\n";
 print "<li><a href='home.php'>Home</a></li>\n";
@@ -76,52 +75,44 @@ print "</header>\n";
 
 print "<div class='content'>\n";
 print "<div id='content'>\n";
-print "<h1>Here are your results: </h1>\n";
+print "<h1>Here are your results</h1>\n";
 print "<table>";
-
-if(!empty($result) ) {
-
-	foreach ($result as $row) {
+foreach ($result as $row) {
+	print "<tr>";
 	
-		print "<tr>";
+	print "<td>";
+	print ($row['id']); 
+	print "</td>";
 	
-		print "<td>";
-		print ($row['id']); 
-		print "</td>";
-	
-		print "<td>";
-		print ($row['inserttime']); 
-		print "</td>";
+	print "<td>";
+	print ($row['inserttime']); 
+	print "</td>";
 
 	
-		print "<td>";
-		print ($row['booktitle']); 
-		print "</td>";
+	print "<td>";
+	print ($row['booktitle']); 
+	print "</td>";
 	
-		print "<td>";
-		print ($row['isbn']); 
-		print "</td>";
+	print "<td>";
+	print ($row['isbn']); 
+	print "</td>";
 	
-		print "<td>";
-		print ($row['author']); 
-		print "</td>";
+	print "<td>";
+	print ($row['author']); 
+	print "</td>";
 	
-		print "<td>";
-		print ($row['status']); 
-		print "</td>";
+	print "<td>";
+	print ($row['status']); 
+	print "</td>";
 	
-		print "</tr>";
-	
-	}
-} else {
-	print "<h1> Item Not Found </h1>";
+	print "</tr>";
 }
 print "</table>";
 print "</div>\n";
 print "</div>\n";
 
 print "<footer>\n";
-print "<p>Assignment 1 Footer. Noah Warren, CNMT 310, 9/30/2018</p>\n";
+print "<p>CNMT 310, Fall Semester, Group 1</p>\n";
 print "</footer>\n";
 print "</div>\n";
 print $page->getBottomSection();
