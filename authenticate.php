@@ -63,7 +63,9 @@ if (!$db->getConnStatus()) {
 }
 
 /* Authenticate user here
-
+function authenticate($email, $password){
+	// authentication code here
+}
 */
 	
 	
