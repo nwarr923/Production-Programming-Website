@@ -67,6 +67,93 @@ function setTopSection() {
 
 } //end function setTopSection
 
+function setSiteHeader($userName, $pageTitle, bool &$authentication){
+	if ($authentication == true) {
+		$returnVal = "";
+		$returnVal .= "<div class='size-wrapper'>\n";
+		$returnVal .= "<header>\n";
+		$returnVal .= "<a id='login' href='login.php'>Welcome " . $userName . "</a>\n";
+		$returnVal .= "<a id='login' href='logout.php'>Log Out</a>\n";
+		$returnVal .= "<a id='siteTitle' href='home.php'>CNMT  310  Group 1</a>\n";
+		$returnVal .= "<nav>\n";
+		$returnVal .= "<ul class='navbar'>\n";
+		
+		if ($pageTitle == 'home.php') {
+			$returnVal .= "<li><a class='active' href='home.php'>Home</a></li>\n";
+			$returnVal .= "<li><a href='aboutUs.php'>About Us</a></li>\n";
+			$returnVal .= "<li><a href='contactUs.php'>Contact Us</a></li>\n";
+			$returnVal .= "<li><a href='bookInfo.php'>Book Request</a></li>\n";
+		} else if ($pageTitle == 'aboutUs.php') {
+			$returnVal .= "<li><a href='home.php'>Home</a></li>\n";
+			$returnVal .= "<li><a class='active' href='aboutUs.php'>About Us</a></li>\n";
+			$returnVal .= "<li><a href='contactUs.php'>Contact Us</a></li>\n";
+			$returnVal .= "<li><a href='bookInfo.php'>Book Request</a></li>\n";
+		} else if ($pageTitle == 'contactUs.php') {
+			$returnVal .= "<li><a href='home.php'>Home</a></li>\n";
+			$returnVal .= "<li><a href='aboutUs.php'>About Us</a></li>\n";
+			$returnVal .= "<li><a class='active' href='contactUs.php'>Contact Us</a></li>\n";
+			$returnVal .= "<li><a href='bookInfo.php'>Book Request</a></li>\n";
+		} else if ($pageTitle == 'bookInfo.php') {
+			$returnVal .= "<li><a href='home.php'>Home</a></li>\n";
+			$returnVal .= "<li><a href='aboutUs.php'>About Us</a></li>\n";
+			$returnVal .= "<li><a href='contactUs.php'>Contact Us</a></li>\n";
+			$returnVal .= "<li><a class='active' href='bookInfo.php'>Book Request</a></li>\n";
+		} else {
+			$returnVal .= "<li><a href='home.php'>Home</a></li>\n";
+			$returnVal .= "<li><a href='aboutUs.php'>About Us</a></li>\n";
+			$returnVal .= "<li><a href='contactUs.php'>Contact Us</a></li>\n";
+			$returnVal .= "<li><a href='bookInfo.php'>Book Request</a></li>\n";
+		};
+		
+		$returnVal .= "</ul>";
+		$returnVal .= "</nav>\n";
+		$returnVal .= "</header>\n";
+	}
+	else {
+		$returnVal = "";
+		$returnVal .= "<div class='size-wrapper'>\n";
+		$returnVal .= "<header>\n";
+		$returnVal .= "<a id='login' href='#'>Login</a>\n";
+		$returnVal .= "<a id='siteTitle' href='home.php'>CNMT  310  Group 1</a>\n";
+		$returnVal .= "<nav>\n";
+		$returnVal .= "<ul class='navbar'>\n";
+		
+		if ($pageTitle == 'home.php') {
+			$returnVal .= "<li><a class='active' href='home.php'>Home</a></li>\n";
+			$returnVal .= "<li><a href='aboutUs.php'>About Us</a></li>\n";
+			$returnVal .= "<li><a href='contactUs.php'>Contact Us</a></li>\n";
+			$returnVal .= "<li><a href='bookInfo.php'>Book Request</a></li>\n";
+		} else if ($pageTitle == 'aboutUs.php') {
+			$returnVal .= "<li><a href='home.php'>Home</a></li>\n";
+			$returnVal .= "<li><a class='active' href='aboutUs.php'>About Us</a></li>\n";
+			$returnVal .= "<li><a href='contactUs.php'>Contact Us</a></li>\n";
+			$returnVal .= "<li><a href='bookInfo.php'>Book Request</a></li>\n";
+		} else if ($pageTitle == 'contactUs.php') {
+			$returnVal .= "<li><a href='home.php'>Home</a></li>\n";
+			$returnVal .= "<li><a href='aboutUs.php'>About Us</a></li>\n";
+			$returnVal .= "<li><a class='active' href='contactUs.php'>Contact Us</a></li>\n";
+			$returnVal .= "<li><a href='bookInfo.php'>Book Request</a></li>\n";
+		} else if ($pageTitle == 'bookInfo.php') {
+			$returnVal .= "<li><a href='home.php'>Home</a></li>\n";
+			$returnVal .= "<li><a href='aboutUs.php'>About Us</a></li>\n";
+			$returnVal .= "<li><a href='contactUs.php'>Contact Us</a></li>\n";
+			$returnVal .= "<li><a class='active' href='bookInfo.php'>Book Request</a></li>\n";
+		} else {
+			$returnVal .= "<li><a href='home.php'>Home</a></li>\n";
+			$returnVal .= "<li><a href='aboutUs.php'>About Us</a></li>\n";
+			$returnVal .= "<li><a href='contactUs.php'>Contact Us</a></li>\n";
+			$returnVal .= "<li><a href='bookInfo.php'>Book Request</a></li>\n";
+		};
+		
+		$returnVal .= "</ul>";
+		$returnVal .= "</nav>\n";
+		$returnVal .= "</header>\n";
+	}
+	
+	$this->_header = $returnVal;
+	
+} // end function setSiteHeader
+
 function setBottomSection() {
 	$returnVal = "";
 	$returnVal .= "</body>\n";
@@ -78,6 +165,10 @@ function setBottomSection() {
 
 function getTopSection() {
 	return $this->_top;
+}
+
+function getSiteHeader() {
+	return $this->_header;
 }
 
 function getBottomSection() {
