@@ -1,6 +1,17 @@
 <?php
-// get the data from the form
 
+$auth; 
+$usersName;
+
+session_start();
+if (isset($_SESSION['authType']){
+	$auth = $_SESSION['authType'];
+}
+if (isset($_SESSION['realName']){
+	$usersName = $_SESSION['realName'];
+}
+
+// get the data from the form
 $email;
 $phone_number;
 $message;
@@ -95,9 +106,11 @@ $page = new Template("ThankYou.php");
 $page->setHeadSection("<link rel='stylesheet' type='text/css' href='headerStyles.css'/>");
 $page->setHeadSection("<link rel='stylesheet' type='text/css' href='formStyles.css'/>");
 $page->setTopSection();
+$page->setSiteHeader($usersName, "home.php", $auth);
 $page->setBottomSection();
 
 print $page->getTopSection();
+print $page->getSiteHeader();
 print "<div class='size-wrapper'>\n";
 print "<header>\n";
 print "<a id='login' href='#'>Login</a>\n";

@@ -3,6 +3,17 @@
 $bookInfo;
 $error_message = '';
 
+$auth; 
+$usersName;
+
+session_start();
+if (isset($_SESSION['authType']){
+	$auth = $_SESSION['authType'];
+}
+if (isset($_SESSION['realName']){
+	$usersName = $_SESSION['realName'];
+}
+
 // get the data from the form
 	if (isset($_POST['bookInfo'])) {
 		$bookInfo = $_POST['bookInfo'];
@@ -54,9 +65,11 @@ $page = new Template("results.php");
 $page->setHeadSection("<link rel='stylesheet' type='text/css' href='headerStyles.css'/>");
 $page->setHeadSection("<link rel='stylesheet' type='text/css' href='formStyles.css'/>");
 $page->setTopSection();
+$page->setSiteHeader($usersName, "home.php", $auth);
 $page->setBottomSection();
 
 print $page->getTopSection();
+print $page->getSiteHeader();
 print "<div class='size-wrapper'>\n";
 print "<header>\n";
 print "<a id='login' href='#'>Login</a>\n";

@@ -67,8 +67,8 @@ function setTopSection() {
 
 } //end function setTopSection
 
-function setSiteHeader($userName, $pageTitle, bool &$authentication){
-	if ($authentication == true) {
+function setSiteHeader($userName, $pageTitle, $authentication){
+	if ($authentication == 'admin' || $authentication == 'user') {
 		$returnVal = "";
 		$returnVal .= "<div class='size-wrapper'>\n";
 		$returnVal .= "<header>\n";
@@ -83,27 +83,49 @@ function setSiteHeader($userName, $pageTitle, bool &$authentication){
 			$returnVal .= "<li><a href='aboutUs.php'>About Us</a></li>\n";
 			$returnVal .= "<li><a href='contactUs.php'>Contact Us</a></li>\n";
 			$returnVal .= "<li><a href='bookInfo.php'>Book Request</a></li>\n";
+			if ($authentication == 'admin'){
+				$returnVal .= "<li><a href='contactData.php'>Contact Data</a></li>\n";
+			}
 		} else if ($pageTitle == 'aboutUs.php') {
 			$returnVal .= "<li><a href='home.php'>Home</a></li>\n";
 			$returnVal .= "<li><a class='active' href='aboutUs.php'>About Us</a></li>\n";
 			$returnVal .= "<li><a href='contactUs.php'>Contact Us</a></li>\n";
 			$returnVal .= "<li><a href='bookInfo.php'>Book Request</a></li>\n";
+			if ($authentication == 'admin'){
+				$returnVal .= "<li><a href='contactData.php'>Contact Data</a></li>\n";
+			}
 		} else if ($pageTitle == 'contactUs.php') {
 			$returnVal .= "<li><a href='home.php'>Home</a></li>\n";
 			$returnVal .= "<li><a href='aboutUs.php'>About Us</a></li>\n";
 			$returnVal .= "<li><a class='active' href='contactUs.php'>Contact Us</a></li>\n";
 			$returnVal .= "<li><a href='bookInfo.php'>Book Request</a></li>\n";
+			if ($authentication == 'admin'){
+				$returnVal .= "<li><a href='contactData.php'>Contact Data</a></li>\n";
+			}
 		} else if ($pageTitle == 'bookInfo.php') {
 			$returnVal .= "<li><a href='home.php'>Home</a></li>\n";
 			$returnVal .= "<li><a href='aboutUs.php'>About Us</a></li>\n";
 			$returnVal .= "<li><a href='contactUs.php'>Contact Us</a></li>\n";
 			$returnVal .= "<li><a class='active' href='bookInfo.php'>Book Request</a></li>\n";
+			if ($authentication == 'admin'){
+				$returnVal .= "<li><a href='contactData.php'>Contact Data</a></li>\n";
+			}
+		} else if ($pageTitle == 'contactData.php') {
+			$returnVal .= "<li><a href='home.php'>Home</a></li>\n";
+			$returnVal .= "<li><a href='aboutUs.php'>About Us</a></li>\n";
+			$returnVal .= "<li><a href='contactUs.php'>Contact Us</a></li>\n";
+			$returnVal .= "<li><a href='bookInfo.php'>Book Request</a></li>\n";
+			$returnVal .= "<li><a class='active' href='contactData.php'>Contact Data</a></li>\n";
+			
 		} else {
 			$returnVal .= "<li><a href='home.php'>Home</a></li>\n";
 			$returnVal .= "<li><a href='aboutUs.php'>About Us</a></li>\n";
 			$returnVal .= "<li><a href='contactUs.php'>Contact Us</a></li>\n";
 			$returnVal .= "<li><a href='bookInfo.php'>Book Request</a></li>\n";
-		};
+			if ($authentication == 'admin'){
+				$returnVal .= "<li><a href='contactData.php'>Contact Data</a></li>\n";
+			}
+		}
 		
 		$returnVal .= "</ul>";
 		$returnVal .= "</nav>\n";

@@ -1,78 +1,83 @@
 <?php
-// get the data from the form
 
-$email;
+$username;
 $password;
 $error_message = '';
 
-if(isset($_POST['email']))   
-{
-    $email = $_POST['email'];   
 
-    if ( empty($email) ) 
+    if (isset($_POST['username']) && isset($_POST['password'])) 
     {
-        $error_message = 'Email is a required field.';        
-    }
-}
-else
-{
-    $error_message = 'Email is a required field.';  
-}
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+		
+			
+            $username = filter_var($username, FILTER_SANITIZE_EMAIL);
+            $password = filter_var($password, FILTER_SANITIZE_STRING);
 
- if(isset($_POST['password']))
-{
-    $password = $_POST['password'];
+            $username = filter_var($username, FILTER_VALIDATE_EMAIL);
 
-    if ( empty($password) )  
-    {
-        $error_message = 'Password is a required field.'; 
+			if ($username == FALSE || $password == FALSE)
+			{
+				$error_message = 'Invalid search.';
+			}
+		
 	}
-}
-else
-{
-    $error_message = 'Password is a required field.'; 
-}
+    else 
+    {
+        $error_message = 'Please enter a search.';
+       
+	}
 
-$email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
-$password = filter_var($password, FILTER_SANITIZE_STRING);
-
-$email = filter_var($email, FILTER_VALIDATE_EMAIL); 
-
-
-if(!$password || !$email )
-{
-	$error_message = 'Please enter a message.'; 
-}
-
-// if an error message exists, go to the Contact us page
-if ($error_message != '') {
-	include('contactUs.php');
-	exit();
-} // end if
-
-//connect to database
+    if ($error_message != '') {
+        include('authForm.php');
+        //exit();
+	}
+	
+require_once("Template.php");
 require_once("DB.class.php");
 
 $db = new DB();
-
 //var_dump($db);
 
+//var_dump($db->getConnStatus());
 if (!$db->getConnStatus()) {
-	print "An error has occurred with connection\n";
-	exit;
+  print "An error has occurred with connection\n";
+  exit;
+}
+$username = 'somewebsite@example.com'; 
+$password = 'abcdefg';
+
+$safeuser = $db->dbEsc($username);
+$safepass = $db->dbEsc($password);
+
+$query = "SELECT role.rolename, users.realname" .
+         " FROM  user2role, users , role" .
+         " WHERE username = '" . $safeuser . "'".
+         " AND userpass = '" . $safepass . "'".
+         " AND users.id = user2role.userid" .
+         " AND role.id = user2role.roleid";
+
+
+$result = $db->dbCall($query);
+//var_dump($result[0]['rolename']);
+
+if($result[0]['rolename'] == 'user' || $result[0]['rolename'] == 'admin')
+{
+    session_start();
+
+    $_SESSION['authType'] = $result[0]['rolename'];
+    $_SESSION['realName'] = $result[0]['realname'];
+    var_dump($_SESSION['authType']);
+    var_dump($_SESSION['realName']);
+}
+else
+{
+    include('authForm.php');
+    exit();
 }
 
-/* Authenticate user here
-function authenticate($email, $password){
-	// authentication code here
-}
-*/
-	
-	
 // Send to home when user has been authenticated
 header("location:home.php");
 exit();
-
-?>	
-
+?>
 

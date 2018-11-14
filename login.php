@@ -1,5 +1,14 @@
 <?php
-$auth = true; // Hard coded for testing
+$auth; 
+$usersName;
+
+session_start();
+if (isset($_SESSION['authType']){
+	$auth = $_SESSION['authType'];
+}
+if (isset($_SESSION['realName']){
+	$usersName = $_SESSION['realName'];
+}
 
 require_once("Template.php");
 
@@ -7,7 +16,7 @@ $page = new Template("contactUs.php");
 $page->setHeadSection("<link rel='stylesheet' type='text/css' href='headerStyles.css'/>");
 $page->setHeadSection("<link rel='stylesheet' type='text/css' href='formStyles.css'/>");
 $page->setTopSection();
-$page->setSiteHeader("noah", "home.php", $auth);
+$page->setSiteHeader($usersName, "home.php", $auth);
 $page->setBottomSection();
 
 print $page->getTopSection();
