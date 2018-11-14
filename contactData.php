@@ -23,7 +23,6 @@ if (!$db->getConnStatus()) {
   exit;
 }
 
-session_start();
 $result;
 
 if (isset($_SESSION['authType'])){
@@ -33,7 +32,7 @@ $query = "SELECT * FROM contactinfo";  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<  TO
 $result = $db->dbCall($query);
 
 }
-var_dump($_SESSION['authType']);
+//var_dump($_SESSION['authType']);
 
 $page = new Template("contactData.php");
 $page->setHeadSection("<link rel='stylesheet' type='text/css' href='headerStyles.css'/>");
@@ -54,14 +53,15 @@ print "<table>";
 if(!empty($result) && $_SESSION['authType'] == 'admin') {
 
 	foreach ($result as $row) {
-	
+	//var_dump($result);
+	//var_dump($row);
 		print "<tr>";
 			print "<td>";
 			print "<p> User:  </p>";
 			print "</td>";
 			
 			print "<td>";
-			print ($row['username']); 
+			print ($row['id']); 
 			print "</td>";
 		print "</tr>";
 		
@@ -71,7 +71,7 @@ if(!empty($result) && $_SESSION['authType'] == 'admin') {
 			print "</td>";
 			
 			print "<td>";
-			print ($row['userpass']); 
+			print ($row['email']); 
 			print "</td>";
 		print "</tr>";
 		
@@ -81,19 +81,11 @@ if(!empty($result) && $_SESSION['authType'] == 'admin') {
 			print "</td>";
 			
 			print "<td>";
-			print ($row['userid']); 
+			print ($row['message']); 
 			print "</td>";
 		print "</tr>";
 		
-		print "<tr>";
-			print "<td>";
-			print "<p> Role ID:  </p>";
-			print "</td>";
-			
-			print "<td>";
-			print ($row['roleid']); 
-			print "</td>";
-		print "</tr>";
+		
 	
 	}
 } else {
