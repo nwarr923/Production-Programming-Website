@@ -50,11 +50,11 @@ $password = 'abcdefg';
 $safeuser = $db->dbEsc($username);
 $safepass = $db->dbEsc($password);
 
-$query = "SELECT role.rolename, users.realname" .
-         " FROM  user2role, users , role" .
+$query = "SELECT role.rolename, user.realname" .
+         " FROM  user2role, user , role" .
          " WHERE username = '" . $safeuser . "'".
          " AND userpass = '" . $safepass . "'".
-         " AND users.id = user2role.userid" .
+         " AND user.id = user2role.userid" .
          " AND role.id = user2role.roleid";
 
 
