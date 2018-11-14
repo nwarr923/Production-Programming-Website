@@ -135,7 +135,7 @@ function setSiteHeader($userName, $pageTitle, $authentication){
 		$returnVal = "";
 		$returnVal .= "<div class='size-wrapper'>\n";
 		$returnVal .= "<header>\n";
-		$returnVal .= "<a id='login' href='#'>Login</a>\n";
+		$returnVal .= "<a id='login' href='login.php'>Login</a>\n";
 		$returnVal .= "<a id='siteTitle' href='home.php'>CNMT  310  Group 1</a>\n";
 		$returnVal .= "<nav>\n";
 		$returnVal .= "<ul class='navbar'>\n";

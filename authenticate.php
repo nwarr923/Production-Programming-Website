@@ -29,7 +29,7 @@ $error_message = '';
 	}
 
     if ($error_message != '') {
-        include('authForm.php');
+        include('login.php');
         //exit();
 	}
 	
@@ -72,7 +72,7 @@ if($result[0]['rolename'] == 'user' || $result[0]['rolename'] == 'admin')
 }
 else
 {
-    include('authForm.php');
+    include('login.php');
     exit();
 }
 
