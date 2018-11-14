@@ -5,9 +5,9 @@ $password;
 $error_message = '';
 
 
-    if (isset($_POST['username']) && isset($_POST['password'])) 
+    if (isset($_POST['email']) && isset($_POST['password'])) 
     {
-        $username = $_POST['username'];
+        $username = $_POST['email'];
         $password = $_POST['password'];
 		
 			
@@ -44,8 +44,8 @@ if (!$db->getConnStatus()) {
   print "An error has occurred with connection\n";
   exit;
 }
-$username = 'somewebsite@example.com'; 
-$password = 'abcdefg';
+//$username = 'someemaile@example.com'; 
+//$password = 'abcdefg';
 
 $safeuser = $db->dbEsc($username);
 $safepass = $db->dbEsc($password);
@@ -59,23 +59,31 @@ $query = "SELECT role.rolename, user.realname" .
 
 
 $result = $db->dbCall($query);
-//var_dump($result[0]['rolename']);
-
-if($result[0]['rolename'] == 'user' || $result[0]['rolename'] == 'admin')
+if($result != null)
 {
-    session_start();
 
-    $_SESSION['authType'] = $result[0]['rolename'];
-    $_SESSION['realName'] = $result[0]['realname'];
-    var_dump($_SESSION['authType']);
-    var_dump($_SESSION['realName']);
+    if($result[0]['rolename'] == 'user' || $result[0]['rolename'] == 'admin')
+    {
+        session_start();
+
+        $_SESSION['authType'] = $result[0]['rolename'];
+        $_SESSION['realName'] = $result[0]['realname'];
+        //var_dump($_SESSION['authType']);
+        //var_dump($_SESSION['realName']);
+    }
+    else
+    {
+        include('login.php');
+        exit();
+    }
 }
 else
-{
-    include('login.php');
-    exit();
-}
-
+    {
+        $error_message = 'Incorrect username or password !';
+        include('login.php');
+        
+        exit();
+    }
 // Send to home when user has been authenticated
 header("location:home.php");
 exit();
