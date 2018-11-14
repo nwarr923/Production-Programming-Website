@@ -17,7 +17,7 @@ $result;
 
 if (isset($_SESSION['authType'])){
 	
-$query = "SELECT * FROM contactInfo";  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<  TODO: DOUBLE CHECK TABLE NAME
+$query = "SELECT * FROM contactinfo";  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<  TODO: DOUBLE CHECK TABLE NAME
 
 $result = $db->dbCall($query);
 
