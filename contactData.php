@@ -1,16 +1,6 @@
 <?php
 
-$auth=''; 
-$usersName='';
-
-session_start();
-if (isset($_SESSION['authType'])){
-	$auth = $_SESSION['authType'];
-}
-if (isset($_SESSION['realName'])){
-	$usersName = $_SESSION['realName'];
-}
-	
+require_once('helper.php');
 require_once("Template.php");
 require_once("DB.class.php");
 
@@ -27,7 +17,7 @@ $result;
 
 if (isset($_SESSION['authType'])){
 	
-$query = "SELECT * FROM contactinfo";  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<  TODO: DOUBLE CHECK TABLE NAME
+$query = "SELECT * FROM contactinfo"; 
 
 $result = $db->dbCall($query);
 
@@ -49,46 +39,52 @@ print "<div id='content'>\n";
 print "<h1>Here are your results: </h1>\n";
 print "<table>";
 
-//$_SESSION['admin']
-if(!empty($result) && $_SESSION['authType'] == 'admin') {
 
-	foreach ($result as $row) {
-	//var_dump($result);
-	//var_dump($row);
-		print "<tr>";
-			print "<td>";
-			print "<p> User:  </p>";
-			print "</td>";
+if($_SESSION['authType'] == 'admin') 
+{
+	if(!empty($result))
+	{
+		foreach ($result as $row) {		
 			
-			print "<td>";
-			print ($row['id']); 
-			print "</td>";
-		print "</tr>";
-		
-		print "<tr>";
-			print "<td>";
-			print "<p> Password:  </p>";
-			print "</td>";
+			print "<tr>";
+				print "<td>";
+				print "<p> Phone:  </p>";
+				print "</td>";
+				
+				print "<td>";
+				print ($row['phone']);  //Is this correct column name ??
+				print "</td>";
+			print "</tr>";
 			
-			print "<td>";
-			print ($row['email']); 
-			print "</td>";
-		print "</tr>";
-		
-		print "<tr>";
-			print "<td>";
-			print "<p> User ID:  </p>";
-			print "</td>";
+			print "<tr>";
+				print "<td>";
+				print "<p> Email:  </p>";
+				print "</td>";
+				
+				print "<td>";
+				print ($row['email']); 
+				print "</td>";
+			print "</tr>";
 			
-			print "<td>";
-			print ($row['message']); 
-			print "</td>";
-		print "</tr>";
-		
-		
-	
+			print "<tr>";
+				print "<td>";
+				print "<p> Message:  </p>";
+				print "</td>";
+				
+				print "<td>";
+				print ($row['message']); 
+				print "</td>";
+			print "</tr>";
+					
+		}
 	}
-} else {
+	else
+	{
+		print "<h1> Sorry, no results found. </h1>";
+	}
+} 
+else 
+{
 	print "<h1> You do not have access to this information </h1>";
 }
 print "</table>";

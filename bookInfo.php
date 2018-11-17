@@ -1,16 +1,6 @@
 <?php
 
-$auth=''; 
-$usersName='';
-
-session_start();
-if (isset($_SESSION['authType'])){
-	$auth = $_SESSION['authType'];
-}
-if (isset($_SESSION['realName'])){
-	$usersName = $_SESSION['realName'];
-}
-
+require_once('helper.php');
 require_once("Template.php");
 
 $page = new Template("bookInfo.php");
@@ -33,17 +23,17 @@ if (!empty($error_message))
 	print $error_message;
 	print "</p>";
 } // end if
-print "<form action='results.php' method='post' name='bookSearch' onsubmit='return (validateInfo());>\n";
+print "<form action='results.php' method='post' name='bookSearch' onsubmit='return (validateInfo())'>\n";
 print "<fieldset>\n";
 print "<legend>Book Search</legend>\n";
 print "<div id='data'><br>\n";
 print "<label>Book Information:</label>\n";
 print "<input type='text' name='bookInfo'/><br>\n";
+print "</div>\n";
 print "</fieldset>\n";
 print "<div id='buttons'>\n";
 print "<label>&nbsp;</label>\n";
 print "<input type='submit' value='Submit'/><br />\n";
-print "</div>\n";
 print "</div>\n";
 print "</form>\n";
 print "</div>\n";

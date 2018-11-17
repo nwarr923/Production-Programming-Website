@@ -3,16 +3,7 @@
 $bookInfo;
 $error_message = '';
 
-$auth; 
-$usersName;
-
-session_start();
-if (isset($_SESSION['authType']){
-	$auth = $_SESSION['authType'];
-}
-if (isset($_SESSION['realName']){
-	$usersName = $_SESSION['realName'];
-}
+require_once('helper.php');
 
 // get the data from the form
 	if (isset($_POST['bookInfo'])) {
@@ -58,41 +49,33 @@ $query = "Select * FROM bookinfo HAVING bookinfo.booktitle LIKE '$bookInfo'
 OR bookinfo.isbn LIKE '$bookInfo' OR bookinfo.author LIKE '$bookInfo'";
 
 $result = $db->dbCall($query);
+//var_dump($result);
 
-
+if(empty($result) ) {
+	$error_message = 'Sorry, no results.';
+	include('bookInfo.php');
+    exit();
+}
 
 $page = new Template("results.php");
 $page->setHeadSection("<link rel='stylesheet' type='text/css' href='headerStyles.css'/>");
 $page->setHeadSection("<link rel='stylesheet' type='text/css' href='formStyles.css'/>");
 $page->setTopSection();
-$page->setSiteHeader($usersName, "home.php", $auth);
+$page->setSiteHeader($usersName, "bookInfo.php", $auth);
 $page->setBottomSection();
 
 print $page->getTopSection();
 print $page->getSiteHeader();
-print "<div class='size-wrapper'>\n";
-print "<header>\n";
-print "<a id='login' href='#'>Login</a>\n";
-print "<a id='siteTitle' href='home.php'>CNMT  310  Group 1</a>\n";
-print "<nav>\n";
-print "<ul class='navbar'>\n";
-print "<li><a href='home.php'>Home</a></li>\n";
-print "<li><a href='aboutUs.php'>About Us</a></li>\n";
-print "<li><a href='contactUs.php'>Contact Us</a></li>\n";
-print "<li><a class='active' href='bookInfo.php'>Book Request</a></li>\n";
-print "</ul>";
-print "</nav>\n";
-print "</header>\n";
 
 print "<div class='content'>\n";
 print "<div id='content'>\n";
 print "<h1>Here are your results: </h1>\n";
 print "<table>";
 
-if(!empty($result) ) {
-
-	foreach ($result as $row) {
+if (!empty($result)) {
 	
+	foreach ($result as $row) {
+
 		print "<tr>";
 			print "<td>";
 			print "<p> ID Number: </p>";
@@ -154,9 +137,7 @@ if(!empty($result) ) {
 		print "</tr>";
 	
 	}
-} else {
-	print "<h1> Item Not Found </h1>";
-}
+} 
 print "</table>";
 print "</div>\n";
 print "</div>\n";

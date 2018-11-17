@@ -30,7 +30,7 @@ $error_message = '';
 
     if ($error_message != '') {
         include('login.php');
-        //exit();
+        exit();
 	}
 	
 require_once("Template.php");

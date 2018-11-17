@@ -1,15 +1,6 @@
 <?php
 
-$auth=''; 
-$usersName='';
-
-if (isset($_SESSION['authType'])){
-	$auth = $_SESSION['authType'];
-}
-if (isset($_SESSION['realName'])){
-	$usersName = $_SESSION['realName'];
-}
-
+require_once('helper.php');
 require_once("Template.php");
 
 $page = new Template("contactUs.php");
@@ -25,6 +16,12 @@ print $page->getSiteHeader();
 print "<div class='content'>\n";
 print "<div id='content'>\n";
 print "<h1>Login</h1>\n";
+
+if ($auth == 'user' or $auth == 'admin') {
+	header("location:home.php");
+	exit();
+}
+
 if (!empty($error_message)) 
 {
 	print "<p class='error'>\n";
