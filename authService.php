@@ -26,8 +26,7 @@ if($array != null)
         {
             $safeuser = $array["username"];
             $safepass = $array["password"];
-    
-            $safepass
+
             $db = new DB();
             if (!$db->getConnStatus()) 
             {
@@ -43,7 +42,16 @@ if($array != null)
                 " AND role.id = user2role.roleid";
 
             $result = $db->dbCall($query);
-            print json_encode(array("Result" => $result));
+            $hash = password_hash($safepass,PASSWORD_DEFAULT);
+            
+            if($result != null && password_verify($result[0]['userpass'],$hash))
+            {       
+                print json_encode(array("Result" => $result));
+            }
+            else
+            {
+                print json_encode(array("Result" => null));
+            }
         }
     }
     else
