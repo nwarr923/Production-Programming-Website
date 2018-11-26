@@ -30,7 +30,7 @@ if($array != null)
             $db = new DB();
             if (!$db->getConnStatus()) 
             {
-                print json_encode(array("Result" => "An error has occurred with connection"));
+                print json_encode(array("Result" => null));
                 exit;
             }
 
