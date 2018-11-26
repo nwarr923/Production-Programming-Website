@@ -50,7 +50,8 @@ if (!$db->getConnStatus()) {
 $safeuser = $db->dbEsc($username);
 $safepass = $db->dbEsc($password);
 
-$query = "SELECT role.rolename, user.realname" .
+
+$query = "SELECT role.rolename, user.realname, user.userpass" .
          " FROM  user2role, user , role" .
          " WHERE username = '" . $safeuser . "'".
          " AND userpass = '" . $safepass . "'".
@@ -59,7 +60,12 @@ $query = "SELECT role.rolename, user.realname" .
 
 
 $result = $db->dbCall($query);
-if($result != null)
+
+$hash = password_hash($safepass,PASSWORD_DEFAULT);
+
+//var_dump($hash);
+
+if($result != null && password_verify($result[0]['userpass'],$hash))
 {
 
     if($result[0]['rolename'] == 'user' || $result[0]['rolename'] == 'admin')

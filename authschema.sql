@@ -29,10 +29,11 @@ INSERT INTO role (rolename) VALUES ('user');
 INSERT INTO user2role (userid,roleid) VALUES (1,1);
 INSERT INTO user2role (userid,roleid) VALUES (1,2);
 
-INSERT INTO user (username,userpass,email,creationdate,realname,userstatus) VALUES ('someemail@example.com','abcdefg','someemail@example.com', now(),'Bill Bob','B');
+INSERT INTO user (username,userpass,email,creationdate,realname,userstatus) VALUES ('someemail@example.com','$2y$10$WhDNGxqzRlAlFLPMsDYMNuRizTFjRxMvwagclm/x9XMw9w7Yv9iGa','someemail@example.com', now(),'Bill Bob','B');
 INSERT INTO user2role (userid,roleid) VALUES (2,1);
+INSERT INTO user2role (userid,roleid) VALUES (2,2);
 
-INSERT INTO user (username,userpass,email,creationdate,realname,userstatus) VALUES ('oldman@aol.com','1234567','oldman@aol.com', now(),'Mike N Ike','C');
+INSERT INTO user (username,userpass,email,creationdate,realname,userstatus) VALUES ('oldman@aol.com','$2y$10$BQ7eEtBLykpFxJJOC7VQlu1WrKeoMXbfFAjot10urNEea/mgTHkNW','oldman@aol.com', now(),'Mike N Ike','C');
 INSERT INTO user2role (userid,roleid) VALUES (3,2);
 
 
