@@ -14,15 +14,13 @@ if($array != null)
     {
         $username = $_POST['email'];
         $password = $_POST['password'];
-			
         $username = filter_var($username, FILTER_SANITIZE_EMAIL);
         $password = filter_var($password, FILTER_SANITIZE_STRING);
-
         $username = filter_var($username, FILTER_VALIDATE_EMAIL);
 
         if ($username == FALSE || $password == FALSE) 
         {
-            print json_encode(array("Result" => "Invalid search"));
+            print json_encode(array("Result" => null));
         }
         else 
         {
@@ -50,11 +48,11 @@ if($array != null)
     }
     else
     {
-        print json_encode(array("Result" => "Invalid Search"));
+        print json_encode(array("Result" => null));
     }
 }
 else 
 {
-    print json_encode(array("Result" => "Invalid search"));
+    print json_encode(array("Result" => null));
 }
 ?>
