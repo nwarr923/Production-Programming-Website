@@ -34,48 +34,58 @@ $error_message = '';
 	}
 	
 require_once("Template.php");
-require_once("DB.class.php");
 
-$db = new DB();
-//var_dump($db);
+$data = array("username" => $username,"password" => $password);
 
-//var_dump($db->getConnStatus());
-if (!$db->getConnStatus()) {
-  print "An error has occurred with connection\n";
-  exit;
-}
-//$username = 'someemaile@example.com'; 
-//$password = 'abcdefg';
+$dataJson =  json_encode($data);
 
-$safeuser = $db->dbEsc($username);
-$safepass = $db->dbEsc($password);
+$postString = "user=YOU&password=SOMEPASS&data=" . urlencode($dataJson);
+
+$contentLength = strlen($postString);
+
+$header = array(
+  'Content-Type: application/x-www-form-urlencoded',
+  'Content-Length: ' . $contentLength
+);
+
+$url = "http://cnmtsrv2.uwsp.edu/~aaufd703/sprint2Master/authService.php";
+
+$ch = curl_init();
+
+curl_setopt($ch,
+    CURLOPT_CUSTOMREQUEST, "POST");
+curl_setopt($ch,
+    CURLOPT_POSTFIELDS, $postString);
+curl_setopt($ch,
+    CURLOPT_HTTPHEADER, $header);
 
 
-$query = "SELECT role.rolename, user.realname, user.userpass" .
-         " FROM  user2role, user , role" .
-         " WHERE username = '" . $safeuser . "'".
-         " AND userpass = '" . $safepass . "'".
-         " AND user.id = user2role.userid" .
-         " AND role.id = user2role.roleid";
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+curl_setopt($ch, CURLOPT_URL, $url);
 
+$result = curl_exec($ch); 
 
-$result = $db->dbCall($query);
+curl_close($ch);
 
-$hash = password_hash($safepass,PASSWORD_DEFAULT);
+$result = json_decode($result);
 
-//var_dump($hash);
+var_dump($result);
 
-if($result != null && password_verify($result[0]['userpass'],$hash))
+if($result != null)
 {
-
-    if($result[0]['rolename'] == 'user' || $result[0]['rolename'] == 'admin')
+    if($result[0]['rolename'] == 'user')
     {
         session_start();
-
-        $_SESSION['authType'] = $result[0]['rolename'];
+        $_SESSION['authType'] = 'user';
         $_SESSION['realName'] = $result[0]['realname'];
         //var_dump($_SESSION['authType']);
         //var_dump($_SESSION['realName']);
+    }
+    else if($result[0]['rolename'] == 'user'  && $result[1]['rolename'] == 'admin') //CORRECT INDEXES ?????
+    {
+        session_start();
+        $_SESSION['authType'] = 'admin';
+        $_SESSION['realName'] = $result[0]['realname'];
     }
     else
     {
@@ -90,7 +100,7 @@ else
         
         exit();
     }
-// Send to home when user has been authenticated
+
 header("location:home.php");
 exit();
 ?>
