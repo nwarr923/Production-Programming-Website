@@ -40,7 +40,7 @@ print "<h1>Here are your results: </h1>\n";
 print "<table>";
 
 
-if($_SESSION['authType'] == 'admin') 
+if($_SESSION['authType'][0] == 'admin') 
 {
 	if(!empty($result))
 	{

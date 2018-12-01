@@ -1,12 +1,12 @@
 <?php
-
+require_once("DB.class.php");
 if(!isset($_POST['data']))
 {
     print json_encode(array("Result" => "no data"));
     exit();
 }
 
-$array = json_decode($_POST['data']);
+$array = json_decode($_POST['data'], true);
 
 if($array != null) 
 {
@@ -34,18 +34,18 @@ if($array != null)
                 exit;
             }
 
-            $query = "SELECT role.rolename, user.realname" .
+            $query = "SELECT role.rolename, user.realname, user.userpass" .
                 " FROM  user2role, user , role" .
-                " WHERE username = '" . $safeuser . "'".
-                " AND userpass = '" . $safepass . "'".
+                " WHERE username = '" . $safeuser . "'".                
                 " AND user.id = user2role.userid" .
                 " AND role.id = user2role.roleid";
 
             $result = $db->dbCall($query);
-            $hash = password_hash($safepass,PASSWORD_DEFAULT);
 
-            if($result != null && password_verify($result[0]['userpass'],$hash))
-            {       
+            //print var_dump($result);            
+           
+            if($result != null && password_verify($safepass, $result[0]['userpass']))
+            {      
                 print json_encode(array("Result" => $result));
             }
             else

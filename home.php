@@ -13,7 +13,6 @@ $page->setBottomSection();
 print $page->getTopSection();
 print $page->getSiteHeader();
 
-
 print "<div class='content'>\n";
 print "<h1>CNMT 310 Current Assignment</h1>\n";
 print "<h2>Details</h2>\n";

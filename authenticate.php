@@ -48,7 +48,8 @@ $header = array(
   'Content-Length: ' . $contentLength
 );
 
-$url = "http://cnmtsrv2.uwsp.edu/~aaufd703/sprint2Master/authService.php";
+$url = "http://cnmtsrv2.uwsp.edu/~aaufd703/sprint3Master/authService.php";
+//$url = "http://localhost/sprint3Master/authService.php";
 
 $ch = curl_init();
 
@@ -65,43 +66,45 @@ curl_setopt($ch, CURLOPT_URL, $url);
 
 $result = curl_exec($ch); 
 
+//var_dump(curl_exec($ch));
+
 curl_close($ch);
 
-$result = json_decode($result);
+$result = json_decode($result, true);
 
-var_dump($result);
+//var_dump($result);
 
-if($result != null)
+if($result['Result'] != null)
 {
-    if($result[0]['rolename'] == 'user')
-    {
-        session_start();
-        $_SESSION['authType'] = 'user';
-        $_SESSION['realName'] = $result[0]['realname'];
-        //var_dump($_SESSION['authType']);
-        //var_dump($_SESSION['realName']);
+    session_start();
+
+    $count = 0;
+    $roleArray;
+
+    foreach($result['Result'] as $array)
+    {   
+       $roleArray[$count] =  $array['rolename'];
+       $_SESSION['realName'] = $array['realname'];
+       $count = $count + 1; 
     }
-    else if($result[0]['rolename'] == 'user'  && $result[1]['rolename'] == 'admin') //CORRECT INDEXES ?????
-    {
-        session_start();
-        $_SESSION['authType'] = 'admin';
-        $_SESSION['realName'] = $result[0]['realname'];
-    }
-    else
-    {
-        include('login.php');
-        exit();
-    }
+
+
+    //$_SESSION['authType'] = array(2) { [0]=> string(5) "admin" [1]=> string(4) "user" }
+    //or
+    //$_SESSION['authType'] = array(1) { [0]=> string(4) "user" }
+
+    $_SESSION['authType'] = $roleArray;
+    //var_dump($_SESSION['authType'][0]);
+
+    header("location:home.php");
+    exit();
 }
 else
-    {
-        $error_message = 'Incorrect username or password !';
-        include('login.php');
-        
-        exit();
-    }
-
-header("location:home.php");
-exit();
+{
+    $error_message = 'Incorrect username or password !';
+    include('login.php');        
+    exit();
+}
+   
 ?>
 
